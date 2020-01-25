@@ -1,0 +1,143 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01CULMRDMQB2P3Tx3q1co3rc6Ri2spEirOA",
+    "name": "Stop EC2 Instances",
+    "title": "Stop EC2 Instances",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Stop EC2 Instances",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "aws.endpoint",
+        "target_id": "definition_target_01C6O74QS2VIC50PtL10VWkmknGKEsQb8EN",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01CULMRNA2MJ61whz36Req3Ml1ty4svRcWF",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$global.variable_01CUDZ4MZEA780B37RbNtQocvVCjr1d1ek6.global.variable_01CUDZ4MZEA780B37RbNtQocvVCjr1d1ek6$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01CULMRTHOO3M08raIMFbGlr5KNoAK3Dxiw",
+            "name": "Stop EC2 Instances",
+            "title": "Stop EC2 Instances",
+            "type": "aws.stop_ec2",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Stop EC2 Instances",
+              "instance_ids": [
+                "$activity.definition_activity_01CULMRNA2MJ61whz36Req3Ml1ty4svRcWF.input.source_array[@].EC2Instanceid$"
+              ],
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01C6O74QS2VIC50PtL10VWkmknGKEsQb8EN": {
+      "unique_name": "definition_target_01C6O74QS2VIC50PtL10VWkmknGKEsQb8EN",
+      "name": "CCS AWS Training TRGT",
+      "title": "CCS AWS Training TRGT",
+      "type": "aws.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA",
+        "display_name": "CCS AWS Training TRGT",
+        "region": "us-west-2"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA": {
+      "unique_name": "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA",
+      "name": "CCS AWS Training",
+      "title": "CCS AWS Training",
+      "type": "runtime_user.aws_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "access_key": "*****",
+        "display_name": "CCS AWS Training",
+        "secret_key": "*****"
+      }
+    }
+  },
+  "variables": {
+    "variable_01CUDZ4MZEA780B37RbNtQocvVCjr1d1ek6": {
+      "unique_name": "variable_01CUDZ4MZEA780B37RbNtQocvVCjr1d1ek6",
+      "schema_id": "tabletype_01CSU85X401LF1XQlpOHaqzHFbVIdelqklJ",
+      "properties": {
+        "value": [
+          {
+            "column_data": {
+              "EC2Instanceid": "InstanceID"
+            }
+          }
+        ],
+        "scope": "global",
+        "name": "EC2 Instances to stop",
+        "type": "datatype.table",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01CSU85X401LF1XQlpOHaqzHFbVIdelqklJ": {
+      "unique_name": "tabletype_01CSU85X401LF1XQlpOHaqzHFbVIdelqklJ",
+      "data_type": "datatype.tabletype",
+      "display_name": "EC2 insatnces to start",
+      "columns": [
+        {
+          "is_required": true,
+          "name": "EC2Instanceid",
+          "title": "InstanceID",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}

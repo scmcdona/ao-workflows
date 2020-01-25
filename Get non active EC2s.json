@@ -1,0 +1,611 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9",
+    "name": "Get non active EC2s",
+    "title": "Get non active EC2s",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Currentvpc",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CULM4MGE1K63i8KmOJPPTyd2hBg4mYtaR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "oldvpc",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CULM4MGE3B86DcDxWsLtN1TY41PbbhUlP",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "InstanceId Text",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CULM4MGDYIL2BjCAQbZE01H7Hsop14Pt7",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "row_count",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01D5IVIT6ZZAU72SKD0TbvoNvPvq6bq2j3B",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Get non active EC2s",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "aws.endpoint",
+        "target_id": "definition_target_01C6O74QS2VIC50PtL10VWkmknGKEsQb8EN",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01CULM4QYG2XN4Cvlc2CjGAfDlJfqNyWdDm",
+        "name": "Generic AWS API Request",
+        "title": "Get Inactive EC2 inventory",
+        "type": "aws.api_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "api_call_method": "GET",
+          "api_url": "https://ec2.us-west-2.amazonaws.com/?Action=DescribeInstances&Version=2016-11-15",
+          "continue_on_failure": false,
+          "display_name": "Get Inactive EC2 inventory",
+          "runtime_user": {
+            "override_target_runtime_user": true,
+            "runtime_user_id": "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA"
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01D5ITPRFLTI64gqSk0hTPoe4EwURGP7iNB",
+        "name": "Delete from Table",
+        "title": "Delete from Table",
+        "type": "core.deleterowfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Delete from Table",
+          "input_table": "$global.variable_01CSU8MD1SI342Kuxw0w5KPv4q8hkQykAKQ.global.variable_01CSU8MD1SI342Kuxw0w5KPv4q8hkQykAKQ$",
+          "rows": {
+            "all_rows": true,
+            "rows_matching_criteria": false
+          },
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01CULM4UO32EK04dDSd8YdCgpqULRVfEV3m",
+        "name": "Read Table from XML",
+        "title": "Read EC2 inventory",
+        "type": "corejava.read_table_from_xml",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read EC2 inventory",
+          "input_xml": "$activity.definition_activity_01CULM4QYG2XN4Cvlc2CjGAfDlJfqNyWdDm.output.response_body$",
+          "persist_output": true,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "instanceId",
+              "column_type": "string"
+            },
+            {
+              "column_name": "instanceType",
+              "column_type": "string"
+            },
+            {
+              "column_name": "instanceState",
+              "column_type": "string"
+            },
+            {
+              "column_name": "tagSet",
+              "column_type": "string"
+            },
+            {
+              "column_name": "monitoring",
+              "column_type": "string"
+            },
+            {
+              "column_name": "vpcId",
+              "column_type": "string"
+            },
+            {
+              "column_name": "placement",
+              "column_type": "string"
+            }
+          ],
+          "xmlpath_query": "//instancesSet/*"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01CULM4Z6WJND2aeJkvjTsKwaiXywlk2e02",
+        "name": "Select from Table",
+        "title": "Get VPC inventory of non active EC2s",
+        "type": "core.selectfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "columns": [
+            {
+              "column_name": "instanceId",
+              "column_type": "string"
+            },
+            {
+              "column_name": "instanceType",
+              "column_type": "string"
+            },
+            {
+              "column_name": "instanceState",
+              "column_type": "string"
+            },
+            {
+              "column_name": "monitoring",
+              "column_type": "string"
+            },
+            {
+              "column_name": "vpcId",
+              "column_type": "string"
+            },
+            {
+              "column_name": "placement",
+              "column_type": "string"
+            }
+          ],
+          "continue_on_failure": false,
+          "display_name": "Get VPC inventory of non active EC2s",
+          "input_table": "$activity.definition_activity_01CULM4UO32EK04dDSd8YdCgpqULRVfEV3m.output.read_table_from_xml$",
+          "number_of_rows": {
+            "all_rows": true,
+            "at_most": false
+          },
+          "persist_output": false,
+          "skip_execution": false,
+          "sorting": {
+            "column_name": "vpcId",
+            "order": "asc",
+            "sort_by": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01CULM4Z6WJND2aeJkvjTsKwaiXywlk2e02.output.output_table$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01D5IOH1WKS9N1fBhYBM4t2aIT6mMPD5N7f",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01D5IOH42SZI86eWRGr07eDKGtA5SMu8yl4",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": {
+                      "left_operand": "$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceState$",
+                      "operator": "nmw",
+                      "right_operand": "16*"
+                    },
+                    "operator": "and",
+                    "right_operand": {
+                      "left_operand": "$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceState$",
+                      "operator": "nmw",
+                      "right_operand": "terminated"
+                    }
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01CULM58GPGMS3HDKBGeBWdhDRx5vm6xg8Q",
+                    "name": "Add Row to Table",
+                    "title": "Add Row to Table",
+                    "type": "core.addrowtotable",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Add Row to Table",
+                      "input_table": "$global.variable_01CSU8MD1SI342Kuxw0w5KPv4q8hkQykAKQ.global.variable_01CSU8MD1SI342Kuxw0w5KPv4q8hkQykAKQ$",
+                      "row": [
+                        {
+                          "key": "EC2Instanceid",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceId$"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01D5J87RVX1RR6UhF13af05PWhxpL7nd0LZ",
+                    "name": "Condition Block",
+                    "title": "Condition Block",
+                    "type": "logic.if_else",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Condition Block",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "blocks": [
+                      {
+                        "unique_name": "definition_activity_01D5J87TR34U51SOGq2sZEc8IShx3TgUVBC",
+                        "name": "Condition Branch",
+                        "title": "Condition Branch",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceState$",
+                            "operator": "mw",
+                            "right_operand": "stopped"
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Condition Branch",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01CULM5DB3H7L6ollt86NmXJybFL20cv1f7",
+                            "name": "Set Variables",
+                            "title": "Set text list",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Set text list",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01CULM4MGDYIL2BjCAQbZE01H7Hsop14Pt7$",
+                                  "variable_value_new": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01CULM4MGDYIL2BjCAQbZE01H7Hsop14Pt7$\n$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceId$  $activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceType$  stopped"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      },
+                      {
+                        "unique_name": "definition_activity_01D5J87UFJJEC67VAXuy3zslwdWCzWT1pcQ",
+                        "name": "Condition Branch",
+                        "title": "Condition Branch",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceState$",
+                            "operator": "mw",
+                            "right_operand": "terminated"
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Condition Branch",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01D5J90AY079G45JKUgxnMy2rgn9za5EK6x",
+                            "name": "Set Variables",
+                            "title": "Set text list",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Set text list",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01CULM4MGDYIL2BjCAQbZE01H7Hsop14Pt7$",
+                                  "variable_value_new": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01CULM4MGDYIL2BjCAQbZE01H7Hsop14Pt7$\n$activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceId$  $activity.definition_activity_01CULM53RD5OZ0kh2DPInQxtz1nIt8baJoZ.input.source_array[@].instanceType$  terminated"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01D5IVQ9SUML36o7BEeO9rcY83oasVyCyg0",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01D5IVIT6ZZAU72SKD0TbvoNvPvq6bq2j3B$",
+                          "variable_value_new": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01D5IVIT6ZZAU72SKD0TbvoNvPvq6bq2j3B$+1"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01CULM5H48KUN4CCQ0QSkt0sa93CzNyBStu",
+        "name": "Condition Block",
+        "title": "Send Notification if here are non active EC2s",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Send Notification if here are non active EC2s",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01CULM5JKRQEA73qnkTHFJTbRb6pEx3AbVL",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01D5IVIT6ZZAU72SKD0TbvoNvPvq6bq2j3B$",
+                "operator": "gt",
+                "right_operand": 0
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01CULM5NY22UC66kz3IYLwRb3Cmmp3T16p0",
+                "name": "Send Email",
+                "title": "Notify support of non active EC2 instances",
+                "type": "email.smtp_send_email",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "body": "There are $workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01D5IVIT6ZZAU72SKD0TbvoNvPvq6bq2j3B$\nnon active EC2 Instances\n  EC2 Instance ID  Instance Type   Status\n____________________________________________________\n$workflow.definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9.local.variable_workflow_01CULM4MGDYIL2BjCAQbZE01H7Hsop14Pt7$",
+                  "continue_on_failure": true,
+                  "display_name": "Notify support of non active EC2 instances",
+                  "from": "CLiveAO2020@gmail.com",
+                  "runtime_user": {
+                    "override_target_runtime_user": true,
+                    "runtime_user_id": "definition_runtime_user_01CUEX4D71O2654O7ya9G1ZCinwCMKAISWJ"
+                  },
+                  "skip_execution": false,
+                  "subject": "AWS  EC2s non active instances",
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01CUEXOZ9EFJY3xDl0LFTQ1aKanNDC4lH8D"
+                  },
+                  "to": "lubravo@cisco.com\nravishan@cisco.com\nscmcdona@cisco.com"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "triggers": {
+    "triggerschedule_01D5JKA896DV46bxBVX43QJNzXWl54bLfvK": {
+      "workflow_id": "definition_workflow_01CULM1T13V6F5L8Mn5IU9wIQmkgkDVQQO9",
+      "name": "Start_Stopped_instances",
+      "title": "",
+      "lowercase_name": "schedule.start_stopped_instances",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01D5JK90553HD4cZmyvDVXan99bF34bHayS",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerschedule_01D5JKA896DV46bxBVX43QJNzXWl54bLfvK",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01D5JK90553HD4cZmyvDVXan99bF34bHayS": {
+      "unique_name": "schedule_01D5JK90553HD4cZmyvDVXan99bF34bHayS",
+      "name": "StartNow",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_group_1BMfN6Cjp6x5yy0NdCh9PJC9KGo",
+        "timezone": "US/Eastern",
+        "starttime": "12:40",
+        "interval_hours": 0,
+        "interval_minutes": 10,
+        "number_of_times": 2,
+        "display_name": "StartNow",
+        "description": ""
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_01C6O74QS2VIC50PtL10VWkmknGKEsQb8EN": {
+      "unique_name": "definition_target_01C6O74QS2VIC50PtL10VWkmknGKEsQb8EN",
+      "name": "CCS AWS Training TRGT",
+      "title": "CCS AWS Training TRGT",
+      "type": "aws.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA",
+        "display_name": "CCS AWS Training TRGT",
+        "region": "us-west-2"
+      }
+    },
+    "definition_target_01CUEXOZ9EFJY3xDl0LFTQ1aKanNDC4lH8D": {
+      "unique_name": "definition_target_01CUEXOZ9EFJY3xDl0LFTQ1aKanNDC4lH8D",
+      "name": "AOGmail",
+      "title": "AOGmail",
+      "type": "email.smtp_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01CUEX4D71O2654O7ya9G1ZCinwCMKAISWJ",
+        "display_name": "AOGmail",
+        "no_runtime_user": false,
+        "port": 465,
+        "protocol": "SMTP",
+        "server": "smtp.gmail.com"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA": {
+      "unique_name": "definition_runtime_user_01C6O5PTLXTYQ1h4gy83UcMehDbcBJfdRWA",
+      "name": "CCS AWS Training",
+      "title": "CCS AWS Training",
+      "type": "runtime_user.aws_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "access_key": "*****",
+        "display_name": "CCS AWS Training",
+        "secret_key": "*****"
+      }
+    },
+    "definition_runtime_user_01CUEX4D71O2654O7ya9G1ZCinwCMKAISWJ": {
+      "unique_name": "definition_runtime_user_01CUEX4D71O2654O7ya9G1ZCinwCMKAISWJ",
+      "name": "AOGmail",
+      "title": "AOGmail",
+      "type": "runtime_user.email_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "AOGmail",
+        "password": "*****",
+        "sender": "*****"
+      }
+    }
+  },
+  "variables": {
+    "variable_01CSU8MD1SI342Kuxw0w5KPv4q8hkQykAKQ": {
+      "unique_name": "variable_01CSU8MD1SI342Kuxw0w5KPv4q8hkQykAKQ",
+      "schema_id": "tabletype_01CSU85X401LF1XQlpOHaqzHFbVIdelqklJ",
+      "properties": {
+        "value": [
+          {
+            "column_data": {
+              "EC2Instanceid": "i-0e616f57326a3988e"
+            }
+          }
+        ],
+        "scope": "global",
+        "name": "EC2 Instances to start",
+        "type": "datatype.table",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01CSU85X401LF1XQlpOHaqzHFbVIdelqklJ": {
+      "unique_name": "tabletype_01CSU85X401LF1XQlpOHaqzHFbVIdelqklJ",
+      "data_type": "datatype.tabletype",
+      "display_name": "EC2 insatnces to start",
+      "columns": [
+        {
+          "is_required": true,
+          "name": "EC2Instanceid",
+          "title": "InstanceID",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}

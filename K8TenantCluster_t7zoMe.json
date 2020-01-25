@@ -1,0 +1,2075 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg",
+    "name": "K8TenantCluster_t7zoMe",
+    "title": "K8TenantCluster_t7zoMe",
+    "description": "Workflow to create New Workflow for WM",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "ProviderType",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01D0T74HXUAM062uMQ5SkB2zMdRQky5f6yF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "K8ClusterName",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01D0T7CWT4Z4Y5zWSJF2uS1AvsFUozcG1wL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "DepEnvName",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01D0T7SC33L6G1c3tCMDzTt3cdqTZFzam98",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "CC_RUN_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01D0SVA4ZXCEG5qvO0EZJQeobiwJ97SBsYn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "NODE_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01D0SVA4ZX8NG6GYUZ3nDFEF36fJcx5v3h6",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "depends_on": "CC",
+      "description": "This workflow is the main workflow that will get triggered when the Application Profile \"K8TenantCluster\" is deleted from the Deployments.\nIt is also gets triggered when the K8TenantCluster deployment fails. ",
+      "display_name": "K8TenantCluster_t7zoMe",
+      "runtime_user": {
+        "runtime_user_id": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+        "override_target_runtime_user": true,
+        "runtime_user_type": "runtime_user.ccs_explicit_user"
+      },
+      "target": {
+        "target_type": "ccsuite.endpoint",
+        "target_id": "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01D0SVAK9AYR84XOGhwmcCKG2gvPQN1C9Wq",
+        "name": "Get CloudCenter Context",
+        "title": "Get CloudCenter Context",
+        "type": "ccs.get_cloud_context",
+        "base_type": "activity",
+        "properties": {
+          "action_id": "58",
+          "action_timeout": 180,
+          "cc_configuration": {
+            "execute_action": "external",
+            "reboot_vm": false,
+            "resource_mappings": [
+              {
+                "applied_to": {
+                  "app_ids": [
+                    {
+                      "id": "36",
+                      "name": "Cisco_CSR1000v_Spoke"
+                    },
+                    {
+                      "id": "32",
+                      "name": "F5_SampleApp"
+                    },
+                    {
+                      "id": "39",
+                      "name": "K8TenantCluster"
+                    },
+                    {
+                      "id": "41",
+                      "name": "OpenCart_VM"
+                    },
+                    {
+                      "id": "29",
+                      "name": "WordPress_hybrid"
+                    },
+                    {
+                      "id": "44",
+                      "name": "WordPress_k8s"
+                    }
+                  ]
+                },
+                "resource_type": "app_profile",
+                "resource_type_meta_info": {
+                  "app_profile": {
+                    "app_ids": "All"
+                  }
+                }
+              },
+              {
+                "applied_to": {
+                  "service": [
+                    {
+                      "id": "55",
+                      "name": "docker"
+                    },
+                    {
+                      "id": "63",
+                      "name": "chef"
+                    },
+                    {
+                      "id": "34",
+                      "name": "jetty"
+                    },
+                    {
+                      "id": "6",
+                      "name": "varnish"
+                    },
+                    {
+                      "id": "8",
+                      "name": "cassandra"
+                    },
+                    {
+                      "id": "14",
+                      "name": "geronimo3"
+                    },
+                    {
+                      "id": "51",
+                      "name": "sqlserver2k12"
+                    },
+                    {
+                      "id": "16",
+                      "name": "apache2"
+                    },
+                    {
+                      "id": "33",
+                      "name": "rabbitmq"
+                    },
+                    {
+                      "id": "69",
+                      "name": "ccp_tc"
+                    },
+                    {
+                      "id": "70",
+                      "name": "ciscocsr1000v"
+                    },
+                    {
+                      "id": "71",
+                      "name": "contwordpress"
+                    },
+                    {
+                      "id": "72",
+                      "name": "mysqldb"
+                    },
+                    {
+                      "id": "43",
+                      "name": "CentOS"
+                    },
+                    {
+                      "id": "73",
+                      "name": "f5lb"
+                    },
+                    {
+                      "id": "46",
+                      "name": "Ubuntu"
+                    },
+                    {
+                      "id": "47",
+                      "name": "Windows"
+                    },
+                    {
+                      "id": "2",
+                      "name": "hadoop"
+                    },
+                    {
+                      "id": "3",
+                      "name": "jmeter"
+                    },
+                    {
+                      "id": "5",
+                      "name": "rubyonrails"
+                    },
+                    {
+                      "id": "9",
+                      "name": "haproxy"
+                    },
+                    {
+                      "id": "11",
+                      "name": "memcached"
+                    },
+                    {
+                      "id": "12",
+                      "name": "nginx"
+                    },
+                    {
+                      "id": "17",
+                      "name": "gluster2"
+                    },
+                    {
+                      "id": "22",
+                      "name": "mysql"
+                    },
+                    {
+                      "id": "7",
+                      "name": "tomcat6"
+                    },
+                    {
+                      "id": "15",
+                      "name": "activemq"
+                    },
+                    {
+                      "id": "10",
+                      "name": "mongodb"
+                    },
+                    {
+                      "id": "13",
+                      "name": "tomcat7"
+                    },
+                    {
+                      "id": "50",
+                      "name": "rdsmysql"
+                    },
+                    {
+                      "id": "30",
+                      "name": "sqlserver2k8r2"
+                    },
+                    {
+                      "id": "44",
+                      "name": "RHEL"
+                    },
+                    {
+                      "id": "45",
+                      "name": "SLES"
+                    },
+                    {
+                      "id": "67",
+                      "name": "mysqlcontainer"
+                    },
+                    {
+                      "id": "31",
+                      "name": "iis"
+                    },
+                    {
+                      "id": "62",
+                      "name": "puppet"
+                    },
+                    {
+                      "id": "66",
+                      "name": "mongocontainer"
+                    },
+                    {
+                      "id": "65",
+                      "name": "apache2container"
+                    },
+                    {
+                      "id": "64",
+                      "name": "nginxcontainer"
+                    },
+                    {
+                      "id": "54",
+                      "name": "awselb"
+                    }
+                  ]
+                },
+                "resource_type": "service",
+                "resource_type_meta_info": {
+                  "service": {
+                    "service": "All"
+                  }
+                }
+              },
+              {
+                "applied_to": {
+                  "cloud_region": [
+                    {
+                      "id": "36",
+                      "name": "default"
+                    },
+                    {
+                      "id": "34",
+                      "name": "default"
+                    },
+                    {
+                      "id": "3",
+                      "name": "default"
+                    }
+                  ]
+                },
+                "resource_type": "cloud_region",
+                "resource_type_meta_info": {
+                  "cloud_region": {
+                    "cloud_region": "All"
+                  }
+                }
+              }
+            ],
+            "sync_vm": false,
+            "wf_availability_type": "lifecycle"
+          },
+          "cc_run_id": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.input.variable_workflow_01D0SVA4ZXCEG5qvO0EZJQeobiwJ97SBsYn$",
+          "continue_on_failure": false,
+          "display_name": "Get CloudCenter Context",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01D0T65TRP9GO5UTRX7QjnWWsj4vPSM5UEx",
+        "name": "Read Table from JSON",
+        "title": "Read Table from JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Table from JSON",
+          "input_json": "$activity.definition_activity_01D0SVAK9AYR84XOGhwmcCKG2gvPQN1C9Wq.output.response_body$",
+          "jsonpath_query": "$.parameters.globalParams[*]",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "name",
+              "column_type": "string"
+            },
+            {
+              "column_name": "value",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01D0T65TRP9GO5UTRX7QjnWWsj4vPSM5UEx.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01D0T87ULSO7A1Ry9aS9kyKGIrvsPmI1BPC",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01D0T87W2PLPM4puWevzGuVZCQl1zgzuJPx",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW.input.source_array[@].name$",
+                    "operator": "eq",
+                    "right_operand": "PROVIDER_TYPE"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01D0T8PY6M13V2C6hilLiELAB9Smz9hH62x",
+                    "name": "Set Variables",
+                    "title": "Set Variables - ProviderType",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables - ProviderType",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T74HXUAM062uMQ5SkB2zMdRQky5f6yF$",
+                          "variable_value_new": "$activity.definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW.input.source_array[@].value$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01D0T92VV4ED45ZmSWwL7LeKtaMhSjHdnw4",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW.input.source_array[@].name$",
+                    "operator": "eq",
+                    "right_operand": "DEP_ENV_NAME"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01D0T92WS5EXJ4fhpu2ccL5606t1dtk8XKw",
+                    "name": "Set Variables",
+                    "title": "Set Variables-DepEnv Name",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables-DepEnv Name",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T7SC33L6G1c3tCMDzTt3cdqTZFzam98$",
+                          "variable_value_new": "$activity.definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW.input.source_array[@].value$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01D0TA1YKZ6MR2HzBIzuFmTF6vaLmp17DJW",
+                "name": "Condition Branch",
+                "title": "Condition Branch-TC_NAME",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW.input.source_array[@].name$",
+                    "operator": "eq",
+                    "right_operand": "TC_NAME"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch-TC_NAME",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01D0TA1ZH9L4B6WQdeTRwrFss4T9XC2SUh2",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T7CWT4Z4Y5zWSJF2uS1AvsFUozcG1wL$",
+                          "variable_value_new": "$activity.definition_activity_01D0T7ZD9WGWX7GNbBpe9Tz7uugZ1dinoAW.input.source_array[@].value$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01D0TAW3418GM2KzlAx6LwK090ZWHUAVP2g",
+        "name": "DeleteCCSDeploymentEnv",
+        "title": "DeleteCCSDeploymentEnv",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "DeleteCCSDeploymentEnv",
+          "input": {
+            "variable_workflow_01CZO63Z2P4RX0Vv3lImANcSVQg0EPhEG88": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T7SC33L6G1c3tCMDzTt3cdqTZFzam98$"
+          },
+          "runtime_user": {
+            "override_target_runtime_user": true,
+            "runtime_user_id": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+            "runtime_user_type": "runtime_user.ccs_explicit_user"
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea",
+            "target_type": "ccsuite.endpoint"
+          },
+          "workflow_id": "definition_workflow_01CZO63QQYNWY75zuXNEWwMvtaysI69NrHD"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01D0TB1RWKUOB081q8JiFGP5ICi4eTEujLA",
+        "name": "DeleteCCSCloudEndPoint",
+        "title": "DeleteCCSCloudEndPoint",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "DeleteCCSCloudEndPoint",
+          "input": {
+            "variable_workflow_01CZJ0F4VK12Z62oq9sN6evDLe1jN4gPTBW": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T7CWT4Z4Y5zWSJF2uS1AvsFUozcG1wL$"
+          },
+          "runtime_user": {
+            "override_target_runtime_user": true,
+            "runtime_user_id": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+            "runtime_user_type": "runtime_user.ccs_explicit_user"
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea",
+            "target_type": "ccsuite.endpoint"
+          },
+          "workflow_id": "definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01D0TAR1BE2V927LV5qVtmjOt3NahiikZ90",
+        "name": "DeleteK8sCluster-V3",
+        "title": "DeleteK8sCluster-V3",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "DeleteK8sCluster-V3",
+          "input": {
+            "variable_workflow_01CXSTP52345A754BasgEnYuv36czRibF7X": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T74HXUAM062uMQ5SkB2zMdRQky5f6yF$",
+            "variable_workflow_01CXSTP523DJF0XTVnpZqMlBc0WHLJh3BfI": "$workflow.definition_workflow_01D0SVA5510XX5dIGfFP8Z0JfuNA9r2Djcg.local.variable_workflow_01D0T7CWT4Z4Y5zWSJF2uS1AvsFUozcG1wL$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01CUDZ8LA0EVB3Xie8kmeCuDaDFi8DRhqf4",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01CUDZ8LA0EVB3Xie8kmeCuDaDFi8DRhqf4": {
+      "unique_name": "definition_target_01CUDZ8LA0EVB3Xie8kmeCuDaDFi8DRhqf4",
+      "name": "K8sTarget",
+      "title": "K8sTarget",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "K8sTarget",
+        "host": "172.40.143.41",
+        "no_runtime_user": true,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea": {
+      "unique_name": "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea",
+      "name": "CCSEndpoint",
+      "title": "CCSEndpoint",
+      "type": "ccsuite.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+        "display_name": "CCSEndpoint",
+        "host": "172.40.140.62",
+        "port": 41742,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu": {
+      "unique_name": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+      "name": "CCSAdminUser",
+      "title": "CCSAdminUser",
+      "type": "runtime_user.ccs_explicit_user",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "CCSAdminUser",
+        "password": "*****",
+        "tenant_id": "*****",
+        "username": "*****"
+      }
+    }
+  },
+  "table_types": {
+    "tabletype_01CZM5K3U2NVZ6lD5pYZOB7GHVvNTGpho40": {
+      "unique_name": "tabletype_01CZM5K3U2NVZ6lD5pYZOB7GHVvNTGpho40",
+      "data_type": "datatype.tabletype",
+      "display_name": "CCS_CloudTable",
+      "columns": [
+        {
+          "name": "CloudAccountId",
+          "title": "cloudAccountId",
+          "type": "string"
+        },
+        {
+          "name": "CloudFamily",
+          "title": "cloudFamily",
+          "type": "string"
+        },
+        {
+          "name": "CloudId",
+          "title": "cloudId",
+          "type": "string"
+        },
+        {
+          "name": "CloudName",
+          "title": "cloudName",
+          "type": "string"
+        },
+        {
+          "name": "CloudRegionId",
+          "title": "cloudRegionId",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01CZO63QQYNWY75zuXNEWwMvtaysI69NrHD",
+        "name": "DeleteCCSDeploymentEnv",
+        "title": "DeleteCCSDeploymentEnv",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "envName",
+              "type": "datatype.string",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01CZO63Z2P4RX0Vv3lImANcSVQg0EPhEG88",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "DeleteCCSDeploymentEnv",
+          "runtime_user": {
+            "runtime_user_id": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+            "override_target_runtime_user": true,
+            "runtime_user_type": "runtime_user.ccs_explicit_user"
+          },
+          "target": {
+            "target_type": "ccsuite.endpoint",
+            "target_id": "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01CZO64XJOA271l2sqcPtq7Cfhs8T7eNBUW",
+            "name": "Generic CCS API Request",
+            "title": "Get DepEnv CCS API Request",
+            "type": "ccs.api_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "api_call_method": "GET",
+              "continue_on_failure": false,
+              "display_name": "Get DepEnv CCS API Request",
+              "relative_url": "/cloudcenter-ccm-backend/api/v1/environments/",
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "use_workflow_target": true
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01D0CB8CYOZBG2nRRo0PA52OxQA2en85qO4",
+            "name": "Read Table from JSON",
+            "title": "Read Table from JSON",
+            "type": "corejava.read_table_from_json",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Read Table from JSON",
+              "input_json": "$activity.definition_activity_01CZO64XJOA271l2sqcPtq7Cfhs8T7eNBUW.output.response_body$",
+              "jsonpath_query": "$.deploymentEnvironments[*]",
+              "persist_output": false,
+              "populate_columns": false,
+              "skip_execution": false,
+              "table_columns": [
+                {
+                  "column_name": "id",
+                  "column_type": "string"
+                },
+                {
+                  "column_name": "name",
+                  "column_type": "string"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01D0CC5FKABI15mlFdSBCLTG58YSWdzWBqG",
+            "name": "For Each",
+            "title": "For Each",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each",
+              "skip_execution": false,
+              "source_array": "$activity.definition_activity_01D0CB8CYOZBG2nRRo0PA52OxQA2en85qO4.output.read_table_from_json$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01CZOF5VDX5KJ0gOr3UKHA8foLanFSzQtJe",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01CZOF5X8O7YI7HT5tMCtTuM6b0yVpiYckU",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01D0CC5FKABI15mlFdSBCLTG58YSWdzWBqG.input.source_array[@].name$",
+                        "operator": "mw",
+                        "right_operand": "$workflow.definition_workflow_01CZO63QQYNWY75zuXNEWwMvtaysI69NrHD.input.variable_workflow_01CZO63Z2P4RX0Vv3lImANcSVQg0EPhEG88$*"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01CZOEMMJYS0F4f0r4mIUDkXpv68XVuHeGP",
+                        "name": "Generic CCS API Request",
+                        "title": "Delete DepEnv CCS API Request",
+                        "type": "ccs.api_request",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "api_call_method": "DELETE",
+                          "continue_on_failure": false,
+                          "display_name": "Delete DepEnv CCS API Request",
+                          "relative_url": "/cloudcenter-ccm-backend/api/v1/environments/$activity.definition_activity_01D0CC5FKABI15mlFdSBCLTG58YSWdzWBqG.input.source_array[@].id$",
+                          "runtime_user": {
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "use_workflow_target": true
+                          }
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL",
+        "name": "DeleteCCSCloudEndPoint",
+        "title": "DeleteCCSCloudEndPoint",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "tabletype_01CZM5K3U2NVZ6lD5pYZOB7GHVvNTGpho40",
+            "properties": {
+              "scope": "local",
+              "name": "DeleteCloudTable",
+              "type": "datatype.table",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "c3testcluster",
+              "scope": "input",
+              "name": "clusterName",
+              "type": "datatype.string",
+              "description": "K8s Cluster Name",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01CZJ0F4VK12Z62oq9sN6evDLe1jN4gPTBW",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "DeleteCCSCloudEndPoint",
+          "runtime_user": {
+            "runtime_user_id": "definition_runtime_user_01CZP8C2WEYVK2Jf1m2hjsU2v3soILIGqNu",
+            "override_target_runtime_user": true,
+            "runtime_user_type": "runtime_user.ccs_explicit_user"
+          },
+          "target": {
+            "target_type": "ccsuite.endpoint",
+            "target_id": "definition_target_01CZPBLLI10RE5VKRwGdQLQaLjNAQ0sHNea",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01CZJ0FA291R02zcsC7y8JdMMHvGGmRu9Kv",
+            "name": "Generic CCS API Request",
+            "title": "GetClouds- CCS API Request",
+            "type": "ccs.api_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "api_call_method": "GET",
+              "continue_on_failure": false,
+              "display_name": "GetClouds- CCS API Request",
+              "relative_url": "/cloudcenter-cloud-setup/api/v1/tenants/1/clouds",
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "use_workflow_target": true
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CZK9C5NGP9Y5o9kfP26YgsATmSWWrafV8",
+            "name": "Read Table from JSON",
+            "title": "Read Table from JSON- Clouds",
+            "type": "corejava.read_table_from_json",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Read Table from JSON- Clouds",
+              "input_json": "$activity.definition_activity_01CZJ0FA291R02zcsC7y8JdMMHvGGmRu9Kv.output.response_body$",
+              "jsonpath_query": "$.clouds[*]",
+              "persist_output": false,
+              "populate_columns": false,
+              "skip_execution": false,
+              "table_columns": [
+                {
+                  "column_name": "id",
+                  "column_type": "string"
+                },
+                {
+                  "column_name": "name",
+                  "column_type": "string"
+                },
+                {
+                  "column_name": "cloudFamily",
+                  "column_type": "string"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CZKOMC0GB0M4YhGEG15AG51p0TBE3gJWE",
+            "name": "Read Table from JSON",
+            "title": "Read Table from JSON - CloudAccounts",
+            "type": "corejava.read_table_from_json",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Read Table from JSON - CloudAccounts",
+              "input_json": "$activity.definition_activity_01CZJ0FA291R02zcsC7y8JdMMHvGGmRu9Kv.output.response_body$",
+              "jsonpath_query": "$.clouds[*].detail.cloudAccounts[*]",
+              "persist_output": false,
+              "populate_columns": false,
+              "skip_execution": false,
+              "table_columns": [
+                {
+                  "column_name": "id",
+                  "column_type": "string"
+                },
+                {
+                  "column_name": "displayName",
+                  "column_type": "string"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CZKUI1ZAGWV1xvsFPNVPflJvifBAkUKrv",
+            "name": "Read Table from JSON",
+            "title": "Read Table from JSON - CloudRegions",
+            "type": "corejava.read_table_from_json",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Read Table from JSON - CloudRegions",
+              "input_json": "$activity.definition_activity_01CZJ0FA291R02zcsC7y8JdMMHvGGmRu9Kv.output.response_body$",
+              "jsonpath_query": "$.clouds[*].detail.cloudRegions[*]",
+              "persist_output": false,
+              "populate_columns": false,
+              "skip_execution": false,
+              "table_columns": [
+                {
+                  "column_name": "id",
+                  "column_type": "string"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CZNNXHHJ3LR5kzDVuqbYB3b4TkThvz5oF",
+            "name": "For Each",
+            "title": "For Each Cloud",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each Cloud",
+              "skip_execution": false,
+              "source_array": "$activity.definition_activity_01CZK9C5NGP9Y5o9kfP26YgsATmSWWrafV8.output.read_table_from_json$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01CZNO6XD2BZV2IuUEpTd8ggL1aYDMxjuKW",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01CZNO6YYFO706rHwx0CzrRaAgBGSzCj2su",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01CZNNXHHJ3LR5kzDVuqbYB3b4TkThvz5oF.input.source_array[@].name$",
+                        "operator": "eq",
+                        "right_operand": "$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.input.variable_workflow_01CZJ0F4VK12Z62oq9sN6evDLe1jN4gPTBW$"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01CZM6G8WCEF43ApHjrK1BBuzhPDfKG968b",
+                        "name": "Add Row to Table",
+                        "title": "Add First Row to Table",
+                        "type": "core.addrowtotable",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "continue_on_failure": false,
+                          "display_name": "Add First Row to Table",
+                          "input_table": "$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO$",
+                          "row": [
+                            {
+                              "key": "CloudId",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01CZNNXHHJ3LR5kzDVuqbYB3b4TkThvz5oF.input.source_array[@].id$"
+                            },
+                            {
+                              "key": "CloudAccountId",
+                              "type": "string",
+                              "value": "0"
+                            },
+                            {
+                              "key": "CloudName",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01CZNNXHHJ3LR5kzDVuqbYB3b4TkThvz5oF.input.source_array[@].name$"
+                            },
+                            {
+                              "key": "CloudFamily",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01CZNNXHHJ3LR5kzDVuqbYB3b4TkThvz5oF.input.source_array[@].cloudFamily$"
+                            },
+                            {
+                              "key": "CloudRegionId",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01CZNNXHHJ3LR5kzDVuqbYB3b4TkThvz5oF.input.source_array[@].id$"
+                            }
+                          ],
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01D2BWRBLY8QW3Zo3W3Ak4CFN6syztPujDP",
+                        "name": "Break",
+                        "title": "Break",
+                        "type": "logic.break",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Break",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01CZNRIL9PPNJ3gyBl4VOaDARZaSkcZweQz",
+            "name": "For Each",
+            "title": "For Each Cloud Account",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each Cloud Account",
+              "skip_execution": false,
+              "source_array": "$activity.definition_activity_01CZKOMC0GB0M4YhGEG15AG51p0TBE3gJWE.output.read_table_from_json$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01CZNRIMZHT2W2ulyutbFFtaTwcF7Zs1UOh",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01CZNRINKYN0T4lyCB740LgdeuooLZUuxc3",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01CZNRIL9PPNJ3gyBl4VOaDARZaSkcZweQz.input.source_array[@].displayName$",
+                        "operator": "eq",
+                        "right_operand": "$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.input.variable_workflow_01CZJ0F4VK12Z62oq9sN6evDLe1jN4gPTBW$_Account"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01CZNSYMXI5RA0OEEx8N7jryhe4tez8p0ou",
+                        "name": "Update Row in Table",
+                        "title": "Update Row in Table",
+                        "type": "core.updaterowintable",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "columns": [
+                            {
+                              "column_name": "CloudAccountId",
+                              "column_type": "string"
+                            }
+                          ],
+                          "continue_on_failure": false,
+                          "display_name": "Update Row in Table",
+                          "input_table": "$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO$",
+                          "row": [
+                            {
+                              "key": "CloudAccountId",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01CZNRIL9PPNJ3gyBl4VOaDARZaSkcZweQz.input.source_array[@].id$"
+                            }
+                          ],
+                          "rows": {
+                            "rows_matching_criteria": true,
+                            "where_clause": "CloudName LIKE \"$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.input.variable_workflow_01CZJ0F4VK12Z62oq9sN6evDLe1jN4gPTBW$\""
+                          },
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01D2BWW29QC3N5PVmEXdHX9MdJpZ3Ou98CA",
+                        "name": "Break",
+                        "title": "Break",
+                        "type": "logic.break",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Break",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01D15LERNX77V1MXCXdwOzQzbos0bFgiN7E",
+            "name": "Select from Table",
+            "title": "Select from Table",
+            "type": "core.selectfromtable",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "columns": [
+                {
+                  "column_name": "CloudName",
+                  "column_type": "string"
+                }
+              ],
+              "continue_on_failure": false,
+              "display_name": "Select from Table",
+              "input_table": "$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO$",
+              "number_of_rows": {
+                "all_rows": true,
+                "at_most": false
+              },
+              "persist_output": false,
+              "skip_execution": false,
+              "sorting": {
+                "no_sort": true
+              },
+              "where_clause": "CloudName=\"$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.input.variable_workflow_01CZJ0F4VK12Z62oq9sN6evDLe1jN4gPTBW$\""
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01D15J7D0X6YA5QBqytYSuqbpMRwzlrX3m8",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01D15J7EUWEVQ5G8a0TgQUvhDWbtFOyBs5Q",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": {
+                      "left_operand": "$activity.definition_activity_01D15LERNX77V1MXCXdwOzQzbos0bFgiN7E.output.row_count$",
+                      "operator": "gt",
+                      "right_operand": 0
+                    },
+                    "operator": "and",
+                    "right_operand": {
+                      "left_operand": "$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO[0].CloudAccountId$",
+                      "operator": "ne",
+                      "right_operand": "0"
+                    }
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01CZJ0GL6IJNX2azlwH03fEbEh2a95hTnL8",
+                    "name": "Generic CCS API Request",
+                    "title": "DeleteCloudAccount- CCS API Request",
+                    "type": "ccs.api_request",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "api_call_method": "DELETE",
+                      "continue_on_failure": false,
+                      "display_name": "DeleteCloudAccount- CCS API Request",
+                      "relative_url": "/cloudcenter-cloud-setup/api/v1/tenants/1/clouds/$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO[0].CloudId$/accounts/$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO[0].CloudAccountId$",
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "use_workflow_target": true
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01CZOI1XISE6G0F3MFqL4eDCtiqEmEu9lNc",
+                    "name": "Sleep",
+                    "title": "Sleep",
+                    "type": "core.sleep",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Sleep",
+                      "skip_execution": false,
+                      "sleep_interval": 30
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01D1F74H0GE9C5Dk5TsKB26XdHluPG1lnXL",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01D1F74HTH7Z15QfkAFR091UADwmUWGICqb",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01D15LERNX77V1MXCXdwOzQzbos0bFgiN7E.output.row_count$",
+                    "operator": "gt",
+                    "right_operand": 0
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01D1F74JQYYFE6a1rqTQvvJZXecDXp36wDS",
+                    "name": "Generic CCS API Request",
+                    "title": "DeleteCloud- CCS API Request",
+                    "type": "ccs.api_request",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "api_call_method": "DELETE",
+                      "continue_on_failure": false,
+                      "display_name": "DeleteCloud- CCS API Request",
+                      "relative_url": "/cloudcenter-cloud-setup/api/v1/tenants/1/clouds/$workflow.definition_workflow_01CZJ0EQQHNNL2SGGhAqYm03xt4fDMIcxJL.local.variable_workflow_01CZM68L9CRR26M6lBo4qXgFSwFv5SdCOLO[0].CloudId$",
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "use_workflow_target": true
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn",
+        "name": "DeleteK8sCluster-V3",
+        "title": "DeleteK8sCluster-V3",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "c3testcluster",
+              "scope": "input",
+              "name": "K8sTenantName",
+              "type": "datatype.string",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01CXSTP523DJF0XTVnpZqMlBc0WHLJh3BfI",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "K8sClusterName",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01CXSTP5225VY1txiDwP6nGzYObrxuIWr7M",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.secure_string",
+            "properties": {
+              "value": "*****",
+              "scope": "local",
+              "name": "X-Auth-Token",
+              "type": "datatype.secure_string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01CXSTP5235NU1WnAlVSkvEmYDzB6QcGv9Q",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "K8sKubeConfig",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01CXSTP5232KJ3lz7yY8P9qDIMkuCUTYqIe",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "vsphere",
+              "scope": "input",
+              "name": "ProviderType",
+              "type": "datatype.string",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01CXSTP52345A754BasgEnYuv36czRibF7X",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "K8sClusterUUID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01CXSTP523AFR2wJPsju7L3NxeQrpEKFDhv",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.boolean",
+            "properties": {
+              "value": true,
+              "scope": "local",
+              "name": "P1_Match",
+              "type": "datatype.boolean",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01CXSTP522UFK6leLM5Lvekvc8FOX9htglf",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "DeleteK8sCluster-V3",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "web-service.endpoint",
+            "target_id": "definition_target_01CUDZ8LA0EVB3Xie8kmeCuDaDFi8DRhqf4",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01CXSTP9PVVRJ7eSs8mSW3O7o1B25Q9db6u",
+            "name": "HTTP Request",
+            "title": "LoginToCCP-HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "body": "{\n  \"username\": \"admin\",\n  \"password\": \"Cisco.123\"\n}",
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "display_name": "LoginToCCP-HTTP Request",
+              "method": "POST",
+              "relative_url": "/v3/system/login",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CXSTPCGI4TN22QvgijQNMQK9ceQquma9H",
+            "name": "For Each",
+            "title": "For Each",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each",
+              "skip_execution": false,
+              "source_array": "$activity.definition_activity_01CXSTP9PVVRJ7eSs8mSW3O7o1B25Q9db6u.output.response_headers$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01CXSTPHA0QPI6Ml8XxEorzEPbqlq42syyv",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01CXSTPJONYU26KxgyAY2PT4WiY3kwqVtmw",
+                    "name": "Condition Branch",
+                    "title": "Is x-Auth-Token-Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01CXSTPCGI4TN22QvgijQNMQK9ceQquma9H.input.source_array[@].name$",
+                        "operator": "eqi",
+                        "right_operand": "x-auth-token"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Is x-Auth-Token-Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01CXSTPMZVFP74HyAjdevWOSrKI0eSW2MlV",
+                        "name": "Set Variables",
+                        "title": "Set Variables",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set Variables",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP5235NU1WnAlVSkvEmYDzB6QcGv9Q$",
+                              "variable_value_new": "$activity.definition_activity_01CXSTPCGI4TN22QvgijQNMQK9ceQquma9H.input.source_array[@].value$"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01CXSTPQH7O5L3UXLNQP17bWUUzKCIIrSHa",
+                        "name": "Break",
+                        "title": "Break",
+                        "type": "logic.break",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Break",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01CXSTPT89HCJ1nDnpVAFpmKsOtZ8eTiWeZ",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01CXSTPCGI4TN22QvgijQNMQK9ceQquma9H.input.source_array[@].name$",
+                        "operator": "ne",
+                        "right_operand": "x-auth-token"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01CXSTPWGE0T14EfrX1y9F9LmMuJW7iop6S",
+                        "name": "Continue",
+                        "title": "Continue",
+                        "type": "logic.continue",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Continue",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01CXSTRCZB2DN1mYgfAeZ4N3dvH1UORY4xh",
+            "name": "HTTP Request",
+            "title": "GetCCP-K8Clusters-HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "X-Auth-Token",
+                  "value": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP5235NU1WnAlVSkvEmYDzB6QcGv9Q$"
+                }
+              ],
+              "display_name": "GetCCP-K8Clusters-HTTP Request",
+              "method": "GET",
+              "relative_url": "/v3/clusters/",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CXV1T0GTZP22vEDcFhysvk3BhnZcEscaJ",
+            "name": "Read Table from JSON",
+            "title": "Read Table from JSON",
+            "type": "corejava.read_table_from_json",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Read Table from JSON",
+              "input_json": "$activity.definition_activity_01CXSTRCZB2DN1mYgfAeZ4N3dvH1UORY4xh.output.response_body$",
+              "jsonpath_query": "$[*]",
+              "persist_output": false,
+              "populate_columns": false,
+              "skip_execution": false,
+              "table_columns": [
+                {
+                  "column_name": "type",
+                  "column_type": "string"
+                },
+                {
+                  "column_name": "id",
+                  "column_type": "string"
+                },
+                {
+                  "column_name": "name",
+                  "column_type": "string"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CXVAJXH5DTB45I3dxFVsnrmutDxPzsnuv",
+            "name": "For Each",
+            "title": "For Each",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "For Each",
+              "skip_execution": false,
+              "source_array": "$activity.definition_activity_01CXV1T0GTZP22vEDcFhysvk3BhnZcEscaJ.output.read_table_from_json$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01CXVB1PVS5GE1Gm0kJpiH6IXS4CD1SRvAA",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01CXVB1R66FLD1EzANdiS4jrOIXnXrzX0Iq",
+                    "name": "Condition Branch",
+                    "title": "Delete Cluster Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": {
+                          "left_operand": "$activity.definition_activity_01CXVAJXH5DTB45I3dxFVsnrmutDxPzsnuv.input.source_array[@].name$",
+                          "operator": "mw",
+                          "right_operand": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.input.variable_workflow_01CXSTP523DJF0XTVnpZqMlBc0WHLJh3BfI$*"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$activity.definition_activity_01CXVAJXH5DTB45I3dxFVsnrmutDxPzsnuv.input.source_array[@].type$",
+                          "operator": "mw",
+                          "right_operand": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.input.variable_workflow_01CXSTP52345A754BasgEnYuv36czRibF7X$*"
+                        }
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Delete Cluster Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01CXVCZ800YAQ5IVhI1z0b5JIKdhvtt6irY",
+                        "name": "HTTP Request",
+                        "title": "Delete CCP-K8Clusters-HTTP Request",
+                        "type": "web-service.http_request",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "allow_auto_redirect": true,
+                          "content_type": "application/json",
+                          "continue_on_error_status_code": false,
+                          "continue_on_failure": false,
+                          "custom_headers": [
+                            {
+                              "name": "X-Auth-Token",
+                              "value": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP5235NU1WnAlVSkvEmYDzB6QcGv9Q$"
+                            }
+                          ],
+                          "display_name": "Delete CCP-K8Clusters-HTTP Request",
+                          "method": "DELETE",
+                          "relative_url": "/v3/clusters/$activity.definition_activity_01CXVAJXH5DTB45I3dxFVsnrmutDxPzsnuv.input.source_array[@].id$/",
+                          "runtime_user": {
+                            "override_target_runtime_user": false,
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "override_workflow_target": false,
+                            "override_workflow_target_group_criteria": false,
+                            "use_workflow_target": true,
+                            "use_workflow_target_group": false
+                          }
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01CXVGWO1UK3Y5ppRDRjA0I4Oxve96yAv1j",
+                        "name": "While Loop",
+                        "title": "While Loop",
+                        "type": "logic.while",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "While Loop",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "blocks": [
+                          {
+                            "unique_name": "definition_activity_01CXVGWPTXPI330WCywiKxK9BT4saQZez9S",
+                            "name": "Condition Branch",
+                            "title": "Condition Branch",
+                            "type": "logic.condition_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "condition": {
+                                "left_operand": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP522UFK6leLM5Lvekvc8FOX9htglf$",
+                                "operator": "eq",
+                                "right_operand": true
+                              },
+                              "continue_on_failure": false,
+                              "display_name": "Condition Branch",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01CXVE1TO3FLQ0CGUCvNXch5FN83mgJiEnW",
+                                "name": "Sleep",
+                                "title": "Sleep",
+                                "type": "core.sleep",
+                                "base_type": "activity",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "Sleep",
+                                  "skip_execution": false,
+                                  "sleep_interval": 30
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01CXVE6RF4XL340G62BIU5KOvqRPBs4Kldy",
+                                "name": "HTTP Request",
+                                "title": "GetCCP-K8Clusters-HTTP Request",
+                                "type": "web-service.http_request",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "allow_auto_redirect": true,
+                                  "content_type": "application/json",
+                                  "continue_on_error_status_code": false,
+                                  "continue_on_failure": false,
+                                  "custom_headers": [
+                                    {
+                                      "name": "X-Auth-Token",
+                                      "value": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP5235NU1WnAlVSkvEmYDzB6QcGv9Q$"
+                                    }
+                                  ],
+                                  "display_name": "GetCCP-K8Clusters-HTTP Request",
+                                  "method": "GET",
+                                  "relative_url": "/v3/clusters/",
+                                  "runtime_user": {
+                                    "override_target_runtime_user": false,
+                                    "target_default": true
+                                  },
+                                  "skip_execution": false,
+                                  "target": {
+                                    "override_workflow_target": false,
+                                    "override_workflow_target_group_criteria": false,
+                                    "use_workflow_target": true,
+                                    "use_workflow_target_group": false
+                                  }
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01D0GRNGSVCM14vgJhjyV0rHvW4y7U0ZNA6",
+                                "name": "Read Table from JSON",
+                                "title": "Read Table from JSON",
+                                "type": "corejava.read_table_from_json",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "continue_on_failure": false,
+                                  "display_name": "Read Table from JSON",
+                                  "input_json": "$activity.definition_activity_01CXVE6RF4XL340G62BIU5KOvqRPBs4Kldy.output.response_body$",
+                                  "jsonpath_query": "$[*]",
+                                  "persist_output": false,
+                                  "populate_columns": false,
+                                  "skip_execution": false,
+                                  "table_columns": [
+                                    {
+                                      "column_name": "type",
+                                      "column_type": "string"
+                                    },
+                                    {
+                                      "column_name": "id",
+                                      "column_type": "string"
+                                    },
+                                    {
+                                      "column_name": "name",
+                                      "column_type": "string"
+                                    }
+                                  ]
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01D0GSWBBQURO3LdrPFioosgU14nmqO7iar",
+                                "name": "For Each",
+                                "title": "For Each",
+                                "type": "logic.for_each",
+                                "base_type": "activity",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "For Each",
+                                  "skip_execution": false,
+                                  "source_array": "$activity.definition_activity_01D0GRNGSVCM14vgJhjyV0rHvW4y7U0ZNA6.output.read_table_from_json$"
+                                },
+                                "object_type": "definition_activity",
+                                "actions": [
+                                  {
+                                    "unique_name": "definition_activity_01D0GTD7WFJJ32DpZ5fZ8WeUFuQkYN7CeNu",
+                                    "name": "Condition Block",
+                                    "title": "Condition Block",
+                                    "type": "logic.if_else",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "continue_on_failure": false,
+                                      "display_name": "Condition Block",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "blocks": [
+                                      {
+                                        "unique_name": "definition_activity_01D0GTD9IDM5P3hYeBMldYUXTjnVTWgDVU3",
+                                        "name": "Condition Branch",
+                                        "title": "Condition Branch",
+                                        "type": "logic.condition_block",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "condition": {
+                                            "left_operand": {
+                                              "left_operand": "$activity.definition_activity_01D0GSWBBQURO3LdrPFioosgU14nmqO7iar.input.source_array[@].name$",
+                                              "operator": "eq",
+                                              "right_operand": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.input.variable_workflow_01CXSTP523DJF0XTVnpZqMlBc0WHLJh3BfI$"
+                                            },
+                                            "operator": "and",
+                                            "right_operand": {
+                                              "left_operand": "$activity.definition_activity_01D0GSWBBQURO3LdrPFioosgU14nmqO7iar.input.source_array[@].type$",
+                                              "operator": "eq",
+                                              "right_operand": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.input.variable_workflow_01CXSTP52345A754BasgEnYuv36czRibF7X$"
+                                            }
+                                          },
+                                          "continue_on_failure": false,
+                                          "display_name": "Condition Branch",
+                                          "skip_execution": false
+                                        },
+                                        "object_type": "definition_activity",
+                                        "actions": [
+                                          {
+                                            "unique_name": "definition_activity_01CXVKCA10T117dKu7hpfYLSH7mM4E2Tm0q",
+                                            "name": "Set Variables",
+                                            "title": "Set Variables",
+                                            "type": "core.set_multiple_variables",
+                                            "base_type": "activity",
+                                            "properties": {
+                                              "continue_on_failure": false,
+                                              "display_name": "Set Variables",
+                                              "skip_execution": false,
+                                              "variables_to_update": [
+                                                {
+                                                  "variable_to_update": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP522UFK6leLM5Lvekvc8FOX9htglf$",
+                                                  "variable_value_new": true
+                                                }
+                                              ]
+                                            },
+                                            "object_type": "definition_activity"
+                                          },
+                                          {
+                                            "unique_name": "definition_activity_01D0HQNV96H1X51mwDlFY8n8JVBz8uGWVLi",
+                                            "name": "Break",
+                                            "title": "Break",
+                                            "type": "logic.break",
+                                            "base_type": "activity",
+                                            "properties": {
+                                              "continue_on_failure": false,
+                                              "display_name": "Break",
+                                              "skip_execution": false
+                                            },
+                                            "object_type": "definition_activity"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "unique_name": "definition_activity_01D0HQDIKXQGN7hZr3Um4ntmBaisbmzY2VP",
+                                        "name": "Condition Branch",
+                                        "title": "Condition Branch",
+                                        "type": "logic.condition_block",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "condition": {
+                                            "left_operand": "$activity.definition_activity_01D0GSWBBQURO3LdrPFioosgU14nmqO7iar.input.source_array[@].name$",
+                                            "operator": "ne",
+                                            "right_operand": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.input.variable_workflow_01CXSTP523DJF0XTVnpZqMlBc0WHLJh3BfI$"
+                                          },
+                                          "continue_on_failure": false,
+                                          "display_name": "Condition Branch",
+                                          "skip_execution": false
+                                        },
+                                        "object_type": "definition_activity",
+                                        "actions": [
+                                          {
+                                            "unique_name": "definition_activity_01D0HQDJEDKK842twN6NXSjs5dCOt8IluRm",
+                                            "name": "Set Variables",
+                                            "title": "Set Variables",
+                                            "type": "core.set_multiple_variables",
+                                            "base_type": "activity",
+                                            "properties": {
+                                              "continue_on_failure": false,
+                                              "display_name": "Set Variables",
+                                              "skip_execution": false,
+                                              "variables_to_update": [
+                                                {
+                                                  "variable_to_update": "$workflow.definition_workflow_01CXSTO7SZSZX2ArPfdAwXJNU7dTVR6ipjn.local.variable_workflow_01CXSTP522UFK6leLM5Lvekvc8FOX9htglf$",
+                                                  "variable_value_new": false
+                                                }
+                                              ]
+                                            },
+                                            "object_type": "definition_activity"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    }
+  ]
+}
